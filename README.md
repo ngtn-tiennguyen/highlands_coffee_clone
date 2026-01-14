@@ -5,6 +5,4 @@ highlands coffee clone by willbe (Tien Nguyen)
 
 ## demo
 
-<button style="padding: 10px 20px; background-color: navy; color: white; border: none; border-radius: 5px; font-family: 'Courier New', Courier, monospace; cursor: pointer;">
-    <a href="https://highlands-clone-production-will-be.up.railway.app/" style="color: white; text-decoration: none;">View Demo Here</a>
-</button>
+[![View Demo Here](https://img.shields.io/badge/View_My_Demo_Here-navy?style=for-the-badge&logo=git&logoColor=white)](https://highlands-clone-production-will-be.up.railway.app/)
