@@ -5,4 +5,6 @@ highlands coffee clone by willbe (Tien Nguyen)
 
 ## demo
 
-<a href="https://highlands-clone-production-will-be.up.railway.app/" style="display: none; padding: 10px 20px; background-color: navy; color: white; text-decoration: none; border-radius: 5px; font-family: 'Courier New', Courier, monospace;">View Demo Here</a>
+<button style="padding: 10px 20px; background-color: navy; color: white; border: none; border-radius: 5px; font-family: 'Courier New', Courier, monospace; cursor: pointer;">
+    <a href="https://highlands-clone-production-will-be.up.railway.app/" style="color: white; text-decoration: none;">View Demo Here</a>
+</button>
