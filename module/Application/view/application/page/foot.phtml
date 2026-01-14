@@ -1,0 +1,31 @@
+<div class="section" id="foot">
+  <div class="box">
+    <div class="logo">
+      <img src="<?= $this->basePath('images/logo/logo-fff.png') ?>" alt="">
+    </div>
+  </div>
+  <div class="box">
+    <h3><?= $appMultilang('CONTENT') ?></h3>
+    <ul class="quick-menu">
+      <div class="item">
+        <a aria-current="page" data-target="home"><?= $appMultilang('HOME') ?></a>
+      </div>
+      <div class="item">
+        <a aria-current="page" data-target="products"><?= $appMultilang('MENU') ?></a>
+      </div>
+      <div class="item">
+        <a aria-current="page" data-target="events"><?= $appMultilang('NEW') ?></a>
+      </div>
+      <div class="item">
+        <a aria-current="page" data-target="reviews"><?= $appMultilang('REVIEWS') ?></a>
+      </div>
+    </ul>
+  </div>
+  <div class="box">
+    <h3><?= $appMultilang('REVIEW') ?></h3>
+    <form id="review-email-form" action="">
+      <textarea name="review_content" placeholder="<?= $appMultilang('REVIEW_PLACEHOLDER') ?>" maxlength="400" style="width:100%;min-height:80px;"></textarea>
+      <button type="submit"><?= $appMultilang('SUBMIT') ?></button>
+    </form>
+  </div>
+</div>

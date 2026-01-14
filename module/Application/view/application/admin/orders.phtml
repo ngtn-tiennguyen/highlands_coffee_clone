@@ -1,0 +1,103 @@
+<?php $this->action = 'orders'; ?>
+<?php include(__DIR__ . '/../config/config.php'); ?>
+<div class="admin-card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0"><?= $appMultilang('MANAGE_ORDERS') ?></h5>
+    <button class="btn btn-success btn-sm" onclick="adminOrders.events.openModal()">+ <?= $appMultilang('ADD_ORDER') ?></button>
+  </div>
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h6 class="mb-0"><?= $appMultilang('ORDERS') ?></h6>
+    </div>
+
+    <table class="table table-hover">
+      <thead class="table-light">
+        <tr>
+          <th><?= $appMultilang('ID') ?></th>
+          <th><?= $appMultilang('CUSTOMER_ID') ?></th>
+          <th><?= $appMultilang('ORDER_DATE') ?></th>
+          <th><?= $appMultilang('ORDER_STATUS') ?></th>
+          <th><?= $appMultilang('ACTION') ?></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php if (!empty($this->orders)): ?>
+          <?php foreach ($this->orders as $order): ?>
+            <?php $customerName = trim(($order['first_name'] ?? '') . ' ' . ($order['last_name'] ?? '')); ?>
+            <tr>
+              <td>#<?= htmlspecialchars($order['id']) ?></td>
+              <td><?= $customerName ? htmlspecialchars($customerName) : ('#' . htmlspecialchars($order['customer_id'])) ?>
+              </td>
+              <td><?= date('d/m/Y H:i', strtotime($order['dt_order'])) ?></td>
+              <td>
+                <select class="form-select form-select-sm order-status" data-order-id="<?= $order['id'] ?>"
+                  style="width: auto;">
+                  <option value="Pending" <?= $order['status'] == 'Pending' ? 'selected' : '' ?>><?= $appMultilang('PENDING') ?></option>
+                  <option value="Processing" <?= $order['status'] == 'Processing' ? 'selected' : '' ?>><?= $appMultilang('PROCESSING') ?></option>
+                  <option value="Completed" <?= $order['status'] == 'Completed' ? 'selected' : '' ?>><?= $appMultilang('COMPLETED') ?></option>
+                  <option value="Cancelled" <?= $order['status'] == 'Cancelled' ? 'selected' : '' ?>><?= $appMultilang('CANCELLED') ?></option>
+                </select>
+              </td>
+              <td>
+                <button type="button" class="btn btn-warning btn-sm" onclick="adminOrders.events.edit(<?= $order['id'] ?>)">
+                  <i class="bi bi-pencil"></i> <?= $appMultilang('EDIT') ?>
+                </button>
+                <button type="button" class="btn btn-danger btn-sm"
+                  onclick="adminOrders.events.delete(<?= $order['id'] ?>)">
+                  <i class="bi bi-trash"></i> <?= $appMultilang('DELETE') ?>
+                </button>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <tr>
+            <td colspan="5" class="text-center text-muted"><?= $appMultilang('NO_ORDERS') ?></td>
+          </tr>
+        <?php endif; ?>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="orderModalTitle"><?= $appMultilang('ADD_ORDER') ?></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="orderForm">
+          <input type="hidden" id="orderId" name="id">
+
+          <div class="mb-3">
+            <label class="form-label"><?= $appMultilang('CUSTOMER_NAME') ?></label>
+            <select class="form-select" id="orderCustomer" name="customer_id" required>
+              <option value="">-- <?= $appMultilang('SELECT_CUSTOMER') ?> --</option>
+              <?php if (!empty($this->customers)): ?>
+                <?php foreach ($this->customers as $customer): ?>
+                  <?php $custName = trim(($customer['first_name'] ?? '') . ' ' . ($customer['last_name'] ?? '')); ?>
+                  <option value="<?= $customer['id'] ?>"><?= htmlspecialchars($custName ?: ('#' . $customer['id'])) ?>
+                  </option>
+                <?php endforeach; ?>
+              <?php endif; ?>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><?= $appMultilang('STATUS') ?></label>
+            <select class="form-select" id="orderStatus" name="status" required>
+              <option value="Pending"><?= $appMultilang('PENDING') ?></option>
+              <option value="Processing"><?= $appMultilang('PROCESSING') ?></option>
+              <option value="Completed"><?= $appMultilang('COMPLETED') ?></option>
+              <option value="Cancelled"><?= $appMultilang('CANCELLED') ?></option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= $appMultilang('CANCEL') ?></button>
+        <button type="button" class="btn btn-primary" onclick="adminOrders.events.save()"><?= $appMultilang('SAVE') ?></button>
+      </div>
+    </div>
+  </div>
+</div>

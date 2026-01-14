@@ -1,0 +1,68 @@
+<?php $this->action = 'categories'; ?>
+<?php include(__DIR__ . '/../config/config.php'); ?>
+<div class="admin-card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0"><?= $appMultilang('MANAGE_CATEGORIES') ?></h5>
+    <button class="btn btn-success btn-sm" onclick="adminCategories.events.openModal()">+ <?= $appMultilang('ADD_CATEGORY') ?></button>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="table-light">
+          <tr>
+            <th><?= $appMultilang('ID') ?></th>
+            <th><?= $appMultilang('NAME') ?></th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php if (!empty($this->categories)): ?>
+            <?php foreach ($this->categories as $cat): ?>
+              <tr>
+                <td>#<?= htmlspecialchars($cat['id']) ?></td>
+                <td><?= htmlspecialchars($cat['name']) ?></td>
+                <td>
+                  <button type="button" class="btn btn-warning btn-sm"
+                    onclick="adminCategories.events.edit(<?= $cat['id'] ?>)">
+                    <i class="bi bi-pencil"></i> <?= $appMultilang('EDIT') ?>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm"
+                    onclick="adminCategories.events.delete(<?= $cat['id'] ?>)">
+                    <i class="bi bi-trash"></i> <?= $appMultilang('DELETE') ?>
+                  </button>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <tr>
+              <td colspan="3" class="text-center text-muted"><?= $appMultilang('NO_CATEGORIES') ?></td>
+            </tr>
+          <?php endif; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="categoryModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="categoryModalTitle"><?= $appMultilang('ADD_CATEGORY') ?></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="categoryForm">
+          <input type="hidden" id="categoryId" name="id">
+          <div class="mb-3">
+            <label class="form-label"><?= $appMultilang('NAME') ?></label>
+            <input type="text" class="form-control" id="categoryName" name="name" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= $appMultilang('CANCEL') ?></button>
+        <button type="button" class="btn btn-primary" onclick="adminCategories.events.save()"><?= $appMultilang('SAVE') ?></button>
+      </div>
+    </div>
+  </div>
+</div>

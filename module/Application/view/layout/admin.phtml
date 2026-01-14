@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * Admin Layout - Clean layout without customer navbar
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<?= $this->doctype() ?>
+<?php include(__DIR__ . '/../application/config/config.php') ?>
+
+<head>
+  <meta charset="utf-8">
+  <?= $this->headTitle($appMultilang('ADMIN_DASHBOARD'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+  <?= $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0')->appendHttpEquiv('X-UA-Compatible', 'IE=edge') ?>
+  <?= $this->headLink([
+    'rel' => 'shortcut icon',
+    'type' => 'image/vnd.microsoft.icon',
+    'href' => $this->basePath() . '/images/logo/favicon-wb-rbk.ico'
+  ])
+    ->prependStylesheet('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css')
+    ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+    ->prependStylesheet($this->basePath('css/page/admin.css'))
+    ?>
+  <?= $this->headScript() ?>
+  <script>
+    var BASE_URL = '<?= $this->basePath() ?>';
+  </script>
+</head>
+
+<body>
+  <?= $this->content ?>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="<?= $this->basePath('js/bootstrap.min.js') ?>"></script>
+  <script src="<?= $this->basePath('js/page/admin-sidebar.js') ?>"></script>
+  <script src="<?= $this->basePath('js/page/admin-orders.js') ?>"></script>
+  <script src="<?= $this->basePath('js/page/admin-products.js') ?>"></script>
+  <script src="<?= $this->basePath('js/page/admin-customers.js') ?>"></script>
+  <script src="<?= $this->basePath('js/page/admin-categories.js') ?>"></script>
+  <script src="<?= $this->basePath('js/page/admin.js') ?>"></script>
+</body>
+
+</html>

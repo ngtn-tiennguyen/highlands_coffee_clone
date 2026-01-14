@@ -1,0 +1,61 @@
+<div class="section" id="products">
+    <h2><?= $appMultilang(key: 'MENU') ?></h2>
+    <?php if (!empty($this->listProducts['data'])) { ?>
+        <?php foreach ($this->listProducts['data'] as $id => $data) { ?>
+            <div class="category" id="<?= $id ?>">
+                <h2><?php echo htmlspecialchars($data['category_name']); ?></h2>
+            </div>
+            <div id="product-box-<?= $id ?>" class="product-box">
+                <div class="prev arrow-action hover-item" data-direction="prev" data-id="<?= $id ?>" id="prev-<?= $id ?>">
+                    <span><i class="bi bi-arrow-left-circle-fill"></i></span>
+                </div>
+                <ul class="list-products" id="list-products-<?= $id ?>">
+                    <?php foreach ($data['products'] as $product) { ?>
+                        <div class="hover-item item-product">
+                            <picture>
+                                <source srcset="<?= $this->basePath('images/products/' . htmlspecialchars(preg_replace('/\.png$/', '.webp', $product['image'] ?? ''))); ?>" type="image/webp">
+                                <img src="<?= $this->basePath('images/products/' . htmlspecialchars($product['image'] ?? '')); ?>"
+                                    alt="<?php echo htmlspecialchars($product['name'] ?? ''); ?>" loading="lazy" decoding="async">
+                            </picture>
+                            <div class="stars">
+                                <?php for ($i = 0; $i < 5; $i++): ?>
+                                    <span><i class="bi bi-star-fill"></i></span>
+                                <?php endfor; ?>
+                            </div>
+                            <div class="name"><?php echo htmlspecialchars($product['name'] ?? ''); ?></div>
+                            <div class="desc" title="<?php echo htmlspecialchars($product['descriptions'] ?? ''); ?>">
+                                    <?php if ($product['in_stock'] == 1) { ?>
+                                        <span class="stock-status in-stock"><?= $appMultilang('IN_STOCK') ?></span>
+                                    <?php } else { ?>
+                                        <span class="stock-status out-of-stock"><?= $appMultilang('OUT_OF_STOCK') ?></span>
+                                    <?php } ?>
+                                <span class="desc-tooltip"><?php echo (!empty($product['descriptions'])) ? htmlspecialchars($product['descriptions']) : htmlspecialchars($product['name'] ?? ''); ?></span>
+                            </div>
+                            <div class="price" data-currency="<?= htmlspecialchars($product['currency'] ?? '') ?>"><?php echo number_format((float)($product['price'] ?? 0), 0, ',', '.'); ?>đ</div>
+                            <div class="cart">
+                                <div class="cart-container">
+                                    <span class="cart-counter">0</span>
+                                    <i class="bi bi-bag-dash cart-icon"></i>
+                                </div>
+                                <button class="order-item-btn" <?php echo ($product['in_stock'] == 0) ? 'disabled' : ''; ?>><?= $appMultilang(key: 'ADD_TO_CART') ?></button>
+                            </div>
+                        </div>
+                    <?php } ?>
+
+                </ul>
+                <div class="next arrow-action hover-item" data-direction="next" data-id="<?= $id ?>" id="next-<?= $id ?>">
+                    <span><i class="bi bi-arrow-right-circle-fill"></i></span>
+                </div>
+            </div>
+            <?php if (!empty($this->listProducts['totalPage'][$id]) && $this->listProducts['totalPage'][$id] > 1) { ?>
+                <div class="pagination" id="pagination-products-<?= $id ?>" data-index="<?= $id ?>">
+                    <?php for ($i = 1; $i <= $this->listProducts['totalPage'][$id]; $i++) { ?>
+                        <div class="hover-item item"><a href="?page='<?= $i ?>'"><?= $i ?></a></div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+        <?php } ?>
+    <?php } else { ?>
+        <p><?= $appMultilang('NO_DATA_FOUND') ?></p>
+    <?php } ?>
+</div>

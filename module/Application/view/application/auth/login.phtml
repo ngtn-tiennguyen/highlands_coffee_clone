@@ -1,0 +1,124 @@
+  <?php
+    $this->headScript()
+      ->prependFile($this->basePath('js/bootstrap.min.js'))
+      ->prependFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js');
+  ?>
+  <?= $this->headScript() ?>
+<?php include(__DIR__ . '/../config/config.php'); ?>
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><?= $appMultilang('LOGIN') ?> - <?= $appMultilang('SITE_NAME') ?></title>
+  <?php
+    $this->headLink()
+      ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+      ->prependStylesheet($this->basePath('css/page/login.css'));
+  ?>
+  <?= $this->headLink() ?>
+</head>
+
+<body>
+  <div class="container">
+    <div class="login-card">
+      <div class="card">
+        <div class="card-header">
+          <div class="logo">
+            <img src="/highlands/public/images/logo/logo-willbe.png" alt="Logo" width="80" height="80" style="object-fit:contain;">
+          </div>
+          <h4 class="mb-0"><?= $appMultilang('SITE_NAME') ?></h4>
+          <p class="text-muted"><?= $appMultilang('LOGIN_DASHBOARD') ?></p>
+        </div>
+        <div class="card-body">
+          <ul class="nav nav-tabs mb-3 w-100 d-flex justify-content-center" id="authTab" role="tablist">
+            <li class="nav-item flex-fill text-center" role="presentation">
+              <a class="nav-link w-100<?php echo ($this->activeTab !== 'signup' ? ' active' : ''); ?>" id="login-tab" data-bs-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="<?php echo ($this->activeTab !== 'signup' ? 'true' : 'false'); ?>">
+                <?= $appMultilang('LOGIN') ?>
+              </a>
+            </li>
+            <li class="nav-item flex-fill text-center" role="presentation">
+              <a class="nav-link w-100<?php echo ($this->activeTab === 'signup' ? ' active' : ''); ?>" id="signup-tab" data-bs-toggle="tab" href="#signup" role="tab" aria-controls="signup" aria-selected="<?php echo ($this->activeTab === 'signup' ? 'true' : 'false'); ?>">
+                <?= $appMultilang('SIGN_UP') ?>
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content" id="authTabContent">
+            <div class="tab-pane fade<?php echo ($this->activeTab !== 'signup' ? ' show active' : ''); ?>" id="login" role="tabpanel" aria-labelledby="login-tab">
+              <div id="login-alerts">
+                <?php if (!empty($this->loginError)): ?>
+                  <div class="alert alert-danger" role="alert">
+                    <?= htmlspecialchars($this->loginError) ?>
+                  </div>
+                <?php endif; ?>
+                <?php if (!empty($this->signupSuccess)): ?>
+                  <div class="alert alert-success" role="alert" id="signup-success-alert">
+                    <?= htmlspecialchars($this->signupSuccess) ?>
+                  </div>
+                <?php endif; ?>
+              </div>
+              <form method="post" action="/highlands/public/login">
+                <input type="hidden" name="form_type" value="login">
+                <div class="mb-3">
+                  <label for="username" class="form-label"><?= $appMultilang('USERNAME') ?></label>
+                  <input type="text" class="form-control" id="username" name="username" required autofocus>
+                </div>
+                <div class="mb-4">
+                  <label for="password" class="form-label"><?= $appMultilang('PASSWORD') ?></label>
+                  <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-login w-100">
+                  <?= $appMultilang('LOGIN') ?>
+                </button>
+              </form>
+            </div>
+            <div class="tab-pane fade<?php echo ($this->activeTab === 'signup' ? ' show active' : ''); ?>" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+              <div id="signup-alerts">
+                <?php if (!empty($this->signupError)): ?>
+                  <div class="alert alert-danger" role="alert">
+                    <?= htmlspecialchars($this->signupError) ?>
+                  </div>
+                <?php endif; ?>
+              </div>
+              <form method="post" action="/highlands/public/login">
+                <input type="hidden" name="form_type" value="signup">
+                <div class="mb-3">
+                  <label for="signup-username" class="form-label">Username</label>
+                  <input type="text" class="form-control" id="signup-username" name="username" required>
+                </div>
+                <div class="mb-3">
+                  <label for="signup-password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="signup-password" name="password" required>
+                </div>
+                <div class="mb-3">
+                  <label for="signup-full_name" class="form-label">Full Name</label>
+                  <input type="text" class="form-control" id="signup-full_name" name="full_name" required>
+                </div>
+                <div class="mb-4">
+                  <label for="signup-email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="signup-email" name="email" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-login w-100">Sign Up</button>
+              </form>
+            </div>
+          </div>
+          <div class="text-center mt-3">
+            <a href="/highlands/public" class="text-muted">← <?= $appMultilang('BACK_TO_HOME') ?></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-3 text-white">
+        <small><?= $appMultilang('DEMO_ACCOUNT') ?></small>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+<script src="/highlands/public/js/bootstrap.min.js"></script>
+<script>
+  window.SIGNUP_USERNAME_EXISTS = "<?= $appMultilang('SIGNUP_USERNAME_EXISTS') ?>";
+</script>
+<script src="/highlands/public/js/login.js"></script>

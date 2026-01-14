@@ -1,0 +1,124 @@
+<?php $this->action = 'products'; ?>
+<?php include(__DIR__ . '/../config/config.php'); ?>
+<div class="admin-card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0"><?= $appMultilang('MANAGE_PRODUCTS') ?></h5>
+    <button class="btn btn-success btn-sm" onclick="adminProducts.events.openModal()">+
+      <?= $appMultilang('ADD_PRODUCT') ?></button>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="table-light">
+          <tr>
+            <th><?= $appMultilang('ID') ?></th>
+            <th><?= $appMultilang('PRODUCT_NAME') ?></th>
+            <th><?= $appMultilang('PRODUCT_DESCRIPTION') ?></th>
+            <th><?= $appMultilang('PRODUCT_PRICE') ?></th>
+            <th><?= $appMultilang('PRODUCT_CATEGORY') ?></th>
+            <th><?= $appMultilang('IMAGE') ?></th>
+            <th><?= $appMultilang('ACTION') ?></th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php if (!empty($this->products)) { ?>
+            <?php foreach ($this->products as $product): ?>
+              <tr>
+                <td>#<?= htmlspecialchars($product['id']) ?></td>
+                <td><?= htmlspecialchars($product['name']) ?></td>
+                <td><?= htmlspecialchars(substr($product['descriptions'] ?? '', 0, 50)) ?>...</td>
+                <td><strong><?= number_format($product['price'], 0, ',', '.') ?> VND</strong></td>
+                <td><span class="badge bg-info">
+                    <?= htmlspecialchars($product['category_name'] ?? ('#' . $product['category_id'])) ?>
+                  </span></td>
+                <td>
+                  <?php if (!empty($product['image'])) { ?>
+                    <?php $imgPath = $product['image'];
+                    if (strpos($imgPath, '/') === false) {
+                      $imgPath = 'products/' . $imgPath;
+                    } ?>
+                    <img src="<?= $this->basePath('images/' . $imgPath) ?>" alt="<?= htmlspecialchars($product['name']) ?>"
+                      class="img-thumbnail" style="width:80px;height:80px;object-fit:cover;">
+                  <?php } else { ?>
+                    <span class="text-muted"><?= $appMultilang('NO_IMAGE') ?></span>
+                  <?php } ?>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#productModal"
+                    onclick="adminProducts.events.edit(<?= $product['id'] ?>)">
+                    <i class="bi bi-pencil"></i> <?= $appMultilang('EDIT') ?>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm"
+                    onclick="adminProducts.events.delete(<?= $product['id'] ?>)">
+                    <i class="bi bi-trash"></i> <?= $appMultilang('DELETE') ?>
+                  </button>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          <?php } else { ?>
+            <tr>
+              <td colspan="6" class="text-center text-muted"><?= $appMultilang('NO_PRODUCTS') ?></td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productModalTitle"><?= $appMultilang('ADD_PRODUCT') ?></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="productForm" enctype="multipart/form-data">
+          <input type="hidden" id="productId" name="id" value="">
+
+          <div class="mb-3">
+            <label class="form-label"><?= $appMultilang('PRODUCT_NAME') ?></label>
+            <input type="text" class="form-control" id="productName" name="name" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><?= $appMultilang('PRODUCT_DESCRIPTION') ?></label>
+            <textarea class="form-control" id="productDescription" name="descriptions" rows="3"></textarea>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label"><?= $appMultilang('PRODUCT_PRICE') ?></label>
+              <input type="number" class="form-control" id="productPrice" name="price" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label"><?= $appMultilang('PRODUCT_CATEGORY') ?></label>
+              <select class="form-select" id="productCategory" name="category_id" required>
+                <option value="">-- <?= $appMultilang('SELECT_CATEGORY') ?> --</option>
+                <?php if (!empty($this->categories)) { ?>
+                  <?php foreach ($this->categories as $cat) { ?>
+                    <option value="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['name']) ?></option>
+                  <?php } ?>
+                <?php } ?>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><?= $appMultilang('IMAGE') ?></label>
+            <input type="file" class="form-control" id="productImageFile" name="image" accept="image/*">
+            <input type="hidden" id="productExistingImage" name="existing_image" value="">
+            <div class="mt-2" id="productImagePreviewWrapper" style="display:none;">
+              <small class="text-muted d-block mb-1"><?= $appMultilang('CURRENT_IMAGE') ?>:</small>
+              <img id="productImagePreview" src="" alt="<?= $appMultilang('PRODUCT_IMAGE') ?>" class="img-thumbnail"
+                style="width:120px;height:120px;object-fit:cover;">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= $appMultilang('CANCEL') ?></button>
+        <button type="button" class="btn btn-primary" onclick="adminProducts.events.save()"><?= $appMultilang('SAVE') ?></button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<div id="customer-modal" class="cart-modal" style="display: none;">
+  <div class="cart-modal-content">
+    <div class="cart-modal-header">
+      <h2><?= $appMultilang('CUSTOMER_INFO') ?></h2>
+      <span class="close-customer">&times;</span>
+    </div>
+    <div class="cart-modal-body">
+      <form id="customer-form">
+        <?php if (isset($_SESSION['user_id'])): ?>
+          <?php
+            $fullName = $_SESSION['full_name'] ?? '';
+            $email = $_SESSION['username'] ?? ($_SESSION['email'] ?? '');
+            $nameParts = explode(' ', $fullName, 2);
+            $firstName = $nameParts[0] ?? '';
+            $lastName = $nameParts[1] ?? '';
+          ?>
+          <div class="form-group">
+            <label><?= $appMultilang('FIRST_NAME') ?></label>
+            <input type="text" name="first_name" value="<?= htmlspecialchars($firstName) ?>" readonly>
+          </div>
+          <div class="form-group">
+            <label><?= $appMultilang('LAST_NAME') ?></label>
+            <input type="text" name="last_name" value="<?= htmlspecialchars($lastName) ?>" readonly>
+          </div>
+          <div class="form-group">
+            <label><?= $appMultilang('EMAIL') ?></label>
+            <input type="email" name="email" value="<?= htmlspecialchars($email) ?>" readonly>
+          </div>
+          <div class="form-group">
+            <label><?= $appMultilang('PHONE') ?> *</label>
+            <input type="tel" name="phone" required maxlength="10">
+          </div>
+          <div class="form-group">
+            <label><?= $appMultilang('ADDRESS') ?> *</label>
+            <input type="text" name="address" required>
+          </div>
+        <?php else: ?>
+          <div class="form-group">
+            <label><?= $appMultilang('FIRST_NAME') ?> *</label>
+            <input type="text" name="first_name" required>
+          </div>
+          <div class="form-group">
+            <label><?= $appMultilang('LAST_NAME') ?> *</label>
+            <input type="text" name="last_name" required>
+          </div>
+          <div class="form-group">
+            <label><?= $appMultilang('EMAIL') ?> *</label>
+            <input type="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label><?= $appMultilang('PHONE') ?> *</label>
+            <input type="tel" name="phone" required maxlength="10">
+          </div>
+          <div class="form-group">
+            <label><?= $appMultilang('ADDRESS') ?> *</label>
+            <input type="text" name="address" required>
+          </div>
+        <?php endif; ?>
+        <div class="form-group">
+          <label><?= $appMultilang('STATE') ?> *</label>
+          <input type="text" name="state" required>
+        </div>
+        <div class="form-group">
+          <label><?= $appMultilang('CITY') ?> *</label>
+          <input type="text" name="city" required>
+        </div>
+      </form>
+    </div>
+    <div class="cart-modal-footer">
+      <button id="submit-order-btn" class="btn-order"><?= $appMultilang('SUBMIT_ORDER') ?></button>
+    </div>
+  </div>
+</div>

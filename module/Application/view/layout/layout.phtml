@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<?= $this->doctype() ?>
+<?php include(__DIR__ . '/../application/config/config.php') ?>
+
+<head>
+    <meta charset="utf-8">
+    <?= $this->headTitle($appMultilang('SITE_NAME'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <?= $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0')->appendHttpEquiv('X-UA-Compatible', 'IE=edge') ?>
+
+    <!-- Preconnect to external resources for faster loading -->
+    <link rel="preconnect" href="https://ajax.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://ajax.googleapis.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+    <!-- Preload critical CSS -->
+    <link rel="preload" href="<?= $this->basePath('css/home/style.css') ?>" as="style">
+    <link rel="preload" href="<?= $this->basePath('css/bootstrap.min.css') ?>" as="style">
+
+    <!-- Styles -->
+    <?= $this->headLink([
+        'rel' => 'shortcut icon',
+        'type' => 'image/vnd.microsoft.icon',
+        'href' => $this->basePath() . '/images/logo/favicon-wb-rbk.ico'
+    ])
+        ->prependStylesheet('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css')
+        ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+        ->prependStylesheet($this->basePath('css/home/style.css'))
+        ->prependStylesheet($this->basePath('css/page/menu.css'))
+        ->prependStylesheet($this->basePath('css/page/cart.css'))
+        ->prependStylesheet($this->basePath('css/page/customer.css'))
+        ?>
+
+    <!-- Scripts -->
+    <?= $this->headScript() ?>
+    <script>
+        var BASE_URL = '<?= $this->basePath() ?>';
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark mb-4" role="navigation">
+        <div class="container">
+            <a class="navbar-brand" href="<?= $this->url('home') ?>">
+                <img src="<?= $this->basePath('images/logo/logo.png') ?>" alt="Highlands">
+                <span class="navbar-text text-light"><?= $appMultilang('SITE_NAME') ?></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <?php include_once './module/Application/view/layout/header.phtml' ?>
+        </div>
+    </nav>
+
+    <?php include_once './module/Application/view/application/page/cart.phtml' ?>
+    <?php include_once './module/Application/view/application/page/customer.phtml' ?>
+
+    <?php include_once './module/Application/view/layout/footer.phtml' ?>
+
+    <!-- Preload and load scripts for better performance -->
+    <link rel="preload" href="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" as="script">
+    <link rel="preload" href="<?= $this->basePath('js/bootstrap.min.js') ?>" as="script">
+    <link rel="preload" href="<?= $this->basePath('js/home/index.js') ?>" as="script">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="<?= $this->basePath('js/popper.min.js') ?>"></script>
+    <script src="<?= $this->basePath('js/bootstrap.min.js') ?>"></script>
+    <script src="<?= $this->basePath('js/home/index.js') ?>"></script>
+</body>
+
+</html>

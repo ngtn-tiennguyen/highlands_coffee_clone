@@ -1,0 +1,27 @@
+<div class="section" id="events">
+  <h2><?= $appMultilang('NEW'); ?></h2>
+  <div id="carousel-blocks" class="carousel-blocks">
+    <div class="carousel-track">
+      <?php if (!empty($this->carouselImages)) { ?>
+        <?php foreach ($this->carouselImages as $item) { ?>
+          <div class="block">
+            <img src="<?= $this->basePath('images/products/' . htmlspecialchars($item['image'])); ?>" 
+                 alt="<?= htmlspecialchars($item['name']); ?>" loading="lazy" decoding="async">
+          </div>
+        <?php } ?>
+      <?php } ?>
+    </div>
+  </div>
+  <br>
+  <div id="event-box" class="hover-item">
+    <div class="box-left">
+      <h1>
+        <span>Sale-off to</span>
+        <span>45%</span>
+      </h1>
+    </div>
+    <div class="box-right">
+      <span class="img-event"><img src="<?= $this->basePath('images/events/noel-2025.webp') ?>" alt=""></span>
+    </div>
+  </div>
+</div>

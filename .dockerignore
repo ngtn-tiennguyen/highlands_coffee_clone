@@ -1,0 +1,15 @@
+.git
+.gitignore
+vendor/
+node_modules/
+data/cache/*
+*.log
+.env
+.DS_Store
+Thumbs.db
+.vscode
+.idea
+*.md
+renovate.json
+docker-compose.yml
+import-db.php

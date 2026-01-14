@@ -1,0 +1,228 @@
+.cart-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.cart-modal-content {
+  background-color: var(--container-color);
+  margin: 5% auto;
+  padding: 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-m);
+  width: 80%;
+  max-width: 800px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cart-modal-header {
+  padding: 20px;
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: var(--border-radius-m) var(--border-radius-m) 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-modal-header h2 {
+  margin: 0;
+  font-size: var(--font-size-xxl);
+}
+
+.close-cart {
+  color: white;
+  font-size: 35px;
+  font-weight: var(--font-weight-semi-bold);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-cart:hover,
+.close-cart:focus {
+  color: #ddd;
+}
+
+.cart-modal-body {
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.empty-cart-message {
+  text-align: center;
+  padding: 40px;
+  color: var(--placeholder-color);
+  font-size: var(--font-size-lg);
+}
+
+.cart-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-md);
+  background-color: var(--bg-light);
+}
+
+.cart-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: var(--border-radius-s);
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-info h4 {
+  margin: 0 0 5px 0;
+  font-size: var(--font-size-m);
+  color: var(--text-tertiary);
+}
+
+.cart-item-price {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-s);
+}
+
+.cart-item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qty-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border-color-light);
+  background-color: white;
+  border-radius: var(--border-radius-s);
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  transition: background-color 0.3s;
+}
+
+.qty-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.qty {
+  min-width: 30px;
+  text-align: center;
+  font-weight: var(--font-weight-semi-bold);
+}
+
+.cart-item-total {
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--accent-color);
+  min-width: 100px;
+  text-align: right;
+}
+
+.remove-item {
+  background-color: transparent;
+  border: none;
+  color: var(--error-color);
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.remove-item:hover {
+  color: var(--hover-error);
+}
+
+.cart-modal-footer {
+  padding: 20px;
+  border-top: 1px solid var(--border-color-light);
+  background-color: var(--bg-light);
+  border-radius: 0 0 var(--border-radius-m) var(--border-radius-m);
+}
+
+.cart-total {
+  margin-bottom: 16px;
+  font-size: var(--font-size-lg);
+  text-align: right;
+}
+
+.cart-total span {
+  color: var(--accent-color);
+  font-size: var(--font-size-xl);
+}
+
+.btn-order {
+  width: 100%;
+  padding: 16px;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semi-bold);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-order:hover {
+  background-color: var(--hover-accent);
+}
+
+.nav-cart-container {
+  position: relative;
+  cursor: pointer;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav-cart-container i {
+  font-size: var(--font-size-xxl);
+  color: white;
+}
+
+.nav-cart-container .cart-counter {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  background: rgba(255, 255, 0, 0.9);
+  color: #000;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semi-bold);
+}
+
+@keyframes count {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.animated-counter {
+  animation: count 0.4s ease-in-out;
+}

@@ -1,0 +1,102 @@
+<?php $this->action = 'customers'; ?>
+<?php include(__DIR__ . '/../config/config.php'); ?>
+<div class="admin-card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0"><?= $appMultilang('MANAGE_CUSTOMERS') ?></h5>
+    <button class="btn btn-success btn-sm" onclick="adminCustomers.events.openModal()">+ <?= $appMultilang('ADD_CUSTOMER') ?></button>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="table-light">
+          <tr>
+            <th><?= $appMultilang('ID') ?></th>
+            <th><?= $appMultilang('CUSTOMER_NAME') ?></th>
+            <th><?= $appMultilang('CUSTOMER_EMAIL') ?></th>
+            <th><?= $appMultilang('CUSTOMER_PHONE') ?></th>
+            <th><?= $appMultilang('CUSTOMER_CITY') ?></th>
+            <th><?= $appMultilang('CREATED_AT') ?></th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php if (!empty($this->customers)): ?>
+            <?php foreach ($this->customers as $customer): ?>
+              <tr>
+                <td>#<?= htmlspecialchars($customer['id']) ?></td>
+                <td><?= htmlspecialchars($customer['first_name'] . ' ' . $customer['last_name']) ?></td>
+                <td><?= htmlspecialchars($customer['email']) ?></td>
+                <td><?= htmlspecialchars($customer['phone']) ?></td>
+                <td><?= htmlspecialchars($customer['city']) ?></td>
+                <td><?= date('d/m/Y', strtotime($customer['created_at'])) ?></td>
+                <td>
+                  <button type="button" class="btn btn-warning btn-sm"
+                    onclick="adminCustomers.events.edit(<?= $customer['id'] ?>)">
+                    <i class="bi bi-pencil"></i> <?= $appMultilang('EDIT') ?>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm"
+                    onclick="adminCustomers.events.delete(<?= $customer['id'] ?>)">
+                    <i class="bi bi-trash"></i> <?= $appMultilang('DELETE') ?>
+                  </button>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <tr>
+              <td colspan="7" class="text-center text-muted"><?= $appMultilang('NO_CUSTOMERS') ?></td>
+            </tr>
+          <?php endif; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="customerModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="customerModalTitle"><?= $appMultilang('ADD_CUSTOMER') ?></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="customerForm">
+          <input type="hidden" id="customerId" name="id">
+
+          <div class="mb-3">
+            <label class="form-label"><?= $appMultilang('FIRST_NAME') ?></label>
+            <input type="text" class="form-control" id="customerFirstName" name="first_name" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><?= $appMultilang('LAST_NAME') ?></label>
+            <input type="text" class="form-control" id="customerLastName" name="last_name" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><?= $appMultilang('EMAIL') ?></label>
+            <input type="email" class="form-control" id="customerEmail" name="email" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><?= $appMultilang('PHONE') ?></label>
+            <input type="tel" class="form-control" id="customerPhone" name="phone">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><?= $appMultilang('CITY') ?></label>
+            <input type="text" class="form-control" id="customerCity" name="city">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><?= $appMultilang('ADDRESS') ?></label>
+            <textarea class="form-control" id="customerAddress" name="address" rows="2"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= $appMultilang('CANCEL') ?></button>
+        <button type="button" class="btn btn-primary" onclick="adminCustomers.events.save()"><?= $appMultilang('SAVE') ?></button>
+      </div>
+    </div>
+  </div>
+</div>

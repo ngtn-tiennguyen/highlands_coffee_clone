@@ -1,0 +1,52 @@
+<div class="section" id="home">
+  <div class="circle-background"></div>
+  <div class="content">
+    <div class="text-box">
+      <h2>It's not just Coffee <br /> It's <span class="highlight-text"><?= $appMultilang('HIGHLIGHT_TEXT') ?></span>
+      </h2>
+      <p id="text-original">Highlands is a global coffeehouse chain founded in 1971 in Seattle, Washington, known for
+        its specialty
+        coffee, community atmosphere, and commitment to ethical sourcing.</p>
+      <br>
+      <span id="text-dots">...</span>
+      <br>
+      <p id="text-extra" style="display: none;">Vietnam is the world’s second largest producer of coffee. As a
+        Vietnamese brand, Highlands
+        Coffee hand selects and roasts only the finest aromatic Arabica and bold Robusta beans for our signature blends.
+      </p>
+      <div class="text-more">
+        <input type="checkbox" id="check-more">
+        <label for="check-more" class="more-btn hover-item"><?= $appMultilang('READ_MORE') ?></label>
+      </div>
+    </div>
+    <div class="img-box hover-item">
+      <?php if (!empty($this->listThumbnails)) { ?>
+        <picture>
+            <source srcset="<?= $this->basePath('images/products/' . htmlspecialchars(preg_replace('/\.png$/', '.webp', $this->listThumbnails[0]['src']))); ?>" type="image/webp">
+            <img src="<?= $this->basePath('images/products/' . htmlspecialchars($this->listThumbnails[0]['src'])); ?>" 
+              alt="" class="slider-img" loading="eager" decoding="async">
+        </picture>
+      <?php } ?>
+    </div>
+    <ul class="thumb-box hover">
+      <?php if (!empty($this->listThumbnails)) { ?>
+        <?php foreach ($this->listThumbnails as $item) { ?>
+          <li>
+            <picture>
+              <source srcset="<?= $this->basePath('images/products/' . htmlspecialchars(preg_replace('/\.png$/', '.webp', $item['src']))); ?>" type="image/webp">
+              <img src="<?= $this->basePath('images/products/' . htmlspecialchars($item['src'])); ?>"
+                  background-color="<?php echo htmlspecialchars($item['color']); ?>" alt="" loading="lazy" decoding="async">
+            </picture>
+          </li>
+        <?php } ?>
+      <?php } ?>
+    </ul>
+    <ul class="social-box hover">
+      <li><a href="<?php echo htmlspecialchars(Constants::FACEBOOK_URL); ?>" target="_blank"><img src="<?= $this->basePath('images/logo/facebook.png') ?>" alt="" loading="lazy"></a></li>
+      <li><a href="<?php echo htmlspecialchars(Constants::INSTAGRAM_URL); ?>" target="_blank"><img src="<?= $this->basePath('images/logo/instagram.png') ?>" alt="" loading="lazy"></a></li>
+    </ul>
+  </div>
+  <div class="go-down-btn arrow-action hover-item">
+    <span><i class="bi bi-arrow-down-circle-fill"></i></span>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+#customer-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#customer-modal .cart-modal-content {
+  max-width: 600px;
+  background-color: var(--background-color);
+  margin: 5% auto;
+  padding: 0;
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-m);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#customer-modal .cart-modal-header {
+  padding: 20px;
+  background-color: var(--accent-color);
+  color: var(--container-color);
+  border-radius: var(--border-radius-m) var(--border-radius-m) 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#customer-modal .cart-modal-header h2 {
+  margin: 0;
+  font-size: var(--font-size-xxl);
+}
+
+#customer-modal .cart-modal-body {
+  padding: 20px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+#customer-modal .cart-modal-footer {
+  padding: 20px;
+  border-top: 1px solid var(--disable);
+  background-color: var(--background-color);
+  border-radius: 0 0 var(--border-radius-m) var(--border-radius-m);
+}
+
+.close-customer {
+  color: var(--container-color);
+  font-size: 35px;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-customer:hover,
+.close-customer:focus {
+  color: var(--disable);
+}
+
+#customer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--font-color);
+}
+
+.form-group input {
+  padding: 12px 15px;
+  border: 2px solid var(--disable);
+  border-radius: var(--border-radius-m);
+  font-size: var(--font-size-m);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(178, 41, 46, 0.1);
+}
+
+.form-group input:invalid:not(:placeholder-shown) {
+  border-color: var(--error-color);
+}
+
+.form-group input:valid:not(:placeholder-shown) {
+  border-color: var(--success-color);
+}
+
+.form-group input::placeholder {
+  color: var(--placeholder-color);
+}
+
+#submit-order-btn {
+  margin-top: 10px;
+}

@@ -1,0 +1,59 @@
+<?php include(__DIR__ . '/../config/config.php'); ?>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign Up - <?= $appMultilang('SITE_NAME') ?></title>
+  <link rel="stylesheet" href="/highlands/public/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/highlands/public/css/page/login.css">
+</head>
+<body>
+  <div class="container">
+    <div class="login-card">
+      <div class="card">
+        <div class="card-header">
+          <div class="logo">
+            <img src="/highlands/public/images/logo/favicon-wb-rbk.ico" alt="Logo" width="80" height="80" style="object-fit:contain;">
+          </div>
+          <h4 class="mb-0">Sign Up</h4>
+        </div>
+        <div class="card-body">
+          <?php if (!empty($this->error)): ?>
+            <div class="alert alert-danger" role="alert">
+              <?= htmlspecialchars($this->error) ?>
+            </div>
+          <?php endif; ?>
+          <?php if (!empty($this->success)): ?>
+            <div class="alert alert-success" role="alert">
+              <?= htmlspecialchars($this->success) ?>
+            </div>
+          <?php endif; ?>
+          <form method="post" action="/highlands/public/signup">
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" name="username" required autofocus>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="mb-3">
+              <label for="full_name" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="full_name" name="full_name" required>
+            </div>
+            <div class="mb-4">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-login w-100">Sign Up</button>
+          </form>
+          <div class="text-center mt-3">
+            <a href="/highlands/public/login" class="text-muted">← Back to Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

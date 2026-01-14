@@ -1,0 +1,19 @@
+<div id="cart-modal" class="cart-modal" data-empty-text="<?= $appMultilang('CART_EMPTY') ?>"
+  data-order-success="<?= $appMultilang('ORDER_SUCCESS') ?>" data-order-error="<?= $appMultilang('ORDER_ERROR') ?>"
+  data-total-text="<?= $appMultilang('TOTAL') ?>">
+  <div class="cart-modal-content">
+    <div class="cart-modal-header">
+      <h2><?= $appMultilang('CART') ?></h2>
+      <span class="close-cart">&times;</span>
+    </div>
+    <div class="cart-modal-body" id="cart-items">
+      <p class="empty-cart-message"><?= $appMultilang('CART_EMPTY') ?></p>
+    </div>
+    <div class="cart-modal-footer">
+      <div class="cart-total">
+        <strong><?= $appMultilang('TOTAL') ?>:</strong> <span id="cart-total-price">0 VND</span>
+      </div>
+      <button id="order-btn" class="btn-order"><?= $appMultilang('ORDER_NOW') ?></button>
+    </div>
+  </div>
+</div>

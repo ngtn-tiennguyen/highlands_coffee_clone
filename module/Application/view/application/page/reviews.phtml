@@ -1,0 +1,60 @@
+<div class="section" id="reviews">
+  <h2><?= $appMultilang('REVIEWS') ?></h2>
+  <div id="review-box">
+    <div class="prev arrow-action hover-item" data-direction="prev">
+      <span><i class="bi bi-arrow-left-circle-fill"></i></span>
+    </div>
+    <ul id="list-review" class="hover">
+      <?php if (isset($reviews) && count($reviews) > 0) { ?>
+        <?php foreach ($reviews as $review) { ?>
+          <li class="item-review">
+            <div class="product-images">
+              <?php if (isset($review['products']) && count($review['products']) > 0) { ?>
+                <?php $productCount = count($review['products']); ?>
+                <?php if ($productCount === 1) { ?>
+                  <div class="single-product">
+                    <img src="<?= $this->basePath('images/products/' . htmlspecialchars($review['products'][0]['image'])) ?>" alt="<?= htmlspecialchars($review['products'][0]['name']) ?>">
+                  </div>
+                <?php } else { ?>
+                  <div class="product-grid grid-<?= $productCount ?>">
+                    <?php foreach ($review['products'] as $product) { ?>
+                      <div class="product-thumb">
+                        <img src="<?= $this->basePath('images/products/' . htmlspecialchars($product['image'])) ?>" alt="<?= htmlspecialchars($product['name']) ?>" loading="lazy" decoding="async">
+                      </div>
+                    <?php } ?>
+                  </div>
+                <?php } ?>
+              <?php } else { ?>
+                <div class="single-product">
+                  <img src="<?= $this->basePath('images/default/user-profile-icon.jpg') ?>" alt="Default">
+                </div>
+              <?php } ?>
+            </div>
+            <div class="name"><?= htmlspecialchars($review['name']) ?></div>
+            <div class="stars">
+              <?php for ($i = 1; $i <= 5; $i++) { ?>
+                <?php if ($i <= $review['rating']) { ?>
+                  <span><i class="bi bi-star-fill"></i></span>
+                <?php } else { ?>
+                  <span><i class="bi bi-star"></i></span>
+                <?php } ?>
+              <?php } ?>
+            </div>
+            <div class="text">
+              <p><?= htmlspecialchars($review['comment']) ?></p>
+            </div>
+          </li>
+        <?php } ?>
+      <?php } else { ?>
+        <li class="item-review">
+          <div class="text">
+            <p><?= $appMultilang('NO_REVIEWS_YET') ?></p>
+          </div>
+        </li>
+      <?php } ?>
+    </ul>
+    <div class="next arrow-action hover-item" data-direction="next">
+      <span><i class="bi bi-arrow-right-circle-fill"></i></span>
+    </div>
+  </div>
+</div>

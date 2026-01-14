@@ -1,0 +1,104 @@
+<?php include(__DIR__ . '/../config/config.php'); ?>
+<div class="admin-container">
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <h5 class="mb-0"><?= $appMultilang('SITE_NAME') ?></h5>
+      <small class="text-white-50"><?= htmlspecialchars($_SESSION['full_name'] ?? $appMultilang('ADMIN')) ?></small>
+    </div>
+    <nav class="sidebar-menu">
+      <ul class="menu-list">
+        <li><a href="#" data-action="index" class="menu-link active"
+            data-target="admin"><?= $appMultilang('DASHBOARD') ?></a>
+        </li>
+        <li><a href="#" data-action="products" class="menu-link"
+            data-target="products"><?= $appMultilang('MANAGE_PRODUCTS') ?></a>
+        </li>
+        <li><a href="#" data-action="orders" class="menu-link"
+            data-target="orders"><?= $appMultilang('MANAGE_ORDERS') ?></a>
+        </li>
+        <li><a href="#" data-action="customers" class="menu-link"
+            data-target="customers"><?= $appMultilang('MANAGE_CUSTOMERS') ?></a>
+        </li>
+        <li><a href="#" data-action="categories" class="menu-link"
+            data-target="categories"><?= $appMultilang('MANAGE_CATEGORIES') ?></a>
+        </li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="<?= $this->basePath('logout') ?>" class="btn btn-sm btn-outline-light w-100"><?= $appMultilang('LOGOUT') ?></a>
+    </div>
+  </aside>
+
+  <main class="admin-content">
+    <div id="admin-wrapper">
+      <div class="admin-header d-flex justify-content-between align-items-center">
+        <h1 class="mb-0"><?= $appMultilang('ADMIN_DASHBOARD') ?></h1>
+        <a href="/highlands/public" target="_blank" class="btn btn-sm btn-outline-info"><?= $appMultilang('HOME') ?></a>
+      </div>
+
+      <div id="alerts-container">
+        <?php if (isset($_SESSION['success_message'])): ?>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= htmlspecialchars($_SESSION['success_message']) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+          <?php unset($_SESSION['success_message']); ?>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['error_message'])): ?>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?= htmlspecialchars($_SESSION['error_message']) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+          <?php unset($_SESSION['error_message']); ?>
+        <?php endif; ?>
+      </div>
+
+      <div id="admin-content-area">
+        <?php if (!isset($this->action) || $this->action === 'index'): ?>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon"><i class="bi bi-box-seam"></i></div>
+              <div class="stat-content">
+                <h3><?= $this->stats['total_products'] ?? 0 ?></h3>
+                <p><?= $appMultilang('PRODUCTS') ?></p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon"><i class="bi bi-receipt"></i></div>
+              <div class="stat-content">
+                <h3><?= $this->stats['total_orders'] ?? 0 ?></h3>
+                <p><?= $appMultilang('ORDERS') ?></p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon"><i class="bi bi-people"></i></div>
+              <div class="stat-content">
+                <h3><?= $this->stats['total_customers'] ?? 0 ?></h3>
+                <p><?= $appMultilang('CUSTOMERS') ?></p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon"><i class="bi bi-tags"></i></div>
+              <div class="stat-content">
+                <h3><?= $this->stats['total_categories'] ?? 0 ?></h3>
+                <p><?= $appMultilang('CATEGORIES') ?></p>
+              </div>
+            </div>
+          </div>
+        <?php endif; ?>
+      </div>
+    </div>
+  </main>
+  <footer class="admin-footer text-center"
+    style="color:#888;font-size:13px;position:fixed;left:0;bottom:0;width:100vw;background:rgba(255,255,255,0.95);z-index:9999;padding:8px 0;">
+    <p>
+      &copy; <?= date('Y') ?>
+      <a href="https://getlaminas.org/"><?= $appMultilang('MSG_PROJECT_1') ?></a>
+      <?= $appMultilang('AUTHORED_BY_WILL_BE') ?>.
+    </p>
+  </footer>
+</div>

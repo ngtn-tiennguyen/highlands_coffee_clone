@@ -1,0 +1,33 @@
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" data-target="home"><?= $appMultilang('HOME') ?></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" data-target="products"><?= $appMultilang('MENU') ?></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" data-target="events"><?= $appMultilang('NEW') ?></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" data-target="reviews"><?= $appMultilang('REVIEWS') ?></a>
+        </li>
+        <li class="nav-item d-flex align-items-center position-relative">
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <div class="dropdown">
+                  <a class="nav-link px-2 dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="display: flex; align-items: center;">
+                      <i class="bi bi-person-fill-check text-success" style="font-size: 1.5rem;"></i>
+                      <span class="ms-1 d-none d-md-inline"><?= htmlspecialchars($_SESSION['full_name'] ?? $_SESSION['username']) ?></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" href="<?= $this->basePath('logout') ?>"><i class="bi bi-box-arrow-right me-2"></i><?= $appMultilang('LOGOUT') ?></a></li>
+                  </ul>
+                </div>
+            <?php else: ?>
+                <a class="nav-link px-2" href="#" title="Login" style="display: flex; align-items: center;">
+                    <i class="bi bi-person-circle" style="font-size: 1.5rem; cursor:pointer;" onclick="window.location.href='/highlands/public/login'"></i>
+                </a>
+            <?php endif; ?>
+        </li>
+    </ul>
+</div>
