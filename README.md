@@ -21,9 +21,3 @@
 > **NOTE:** This is just a part of the code based on the MVC model, you cannot run this code directly.
 
 ---
-
-## Demo Highlands MVC
-
-[![View Demo Here](https://img.shields.io/badge/View_Demo_Here-navy?style=for-the-badge&logo=git&logoColor=white)](https://highlands-clone-production-will-be.up.railway.app/)
-
-_Note: This may not work as expected on Railway._
