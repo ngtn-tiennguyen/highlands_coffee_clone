@@ -1,4 +1,4 @@
-# highlands_coffee_clone
+# highlands-coffee-clone
 **_Highlands Coffee Clone_** by **_willbe (Tien Nguyen)_**
 
 ## What This Project Includes
